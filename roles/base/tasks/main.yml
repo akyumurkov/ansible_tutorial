@@ -1,0 +1,4 @@
+- name: add ssh key for ghost
+  authorized_key:
+    user: ghost
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwR3OsA2RpNyyDAQSXBNy4CbuphBtJFcoG1HGFqGAoa ansible"
