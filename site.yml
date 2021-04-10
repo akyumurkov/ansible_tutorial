@@ -7,7 +7,8 @@
    - name: install updates (CentOS)
      tags: always
      dnf:
-       update_only: yes
+       name: "*"
+       state: latest
        update_cache: yes
      when: ansible_distribution == "CentOS"
    - name: install updates (Ubuntu)
@@ -16,6 +17,23 @@
        upgrade: dist
        update_cache: yes
      when: ansible_distribution == "Ubuntu"
+
+- hosts: workstations
+  become: true
+  tasks:
+  
+  - name: install unzip
+    package:
+      name: unzip
+  
+  - name: install terraform
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/0.14.10/terraform_0.14.10_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root
 
 - hosts: web_servers
   become: true
